@@ -1,0 +1,40 @@
+# Dependencies (reinstalled inside Docker)
+node_modules/
+
+# Environment — never bake secrets into the image
+.env
+.env.*
+!.env.example
+
+# Generated files (rebuilt inside Docker)
+styled-system/
+dist/
+dist-ssr/
+
+# Nitro / build artifacts
+.nitro/
+.tanstack/
+.wrangler/
+
+# Git and editor metadata
+.git/
+.gitignore
+.vscode/
+*.local
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Docs (not needed at runtime)
+README.md
+CONTRIBUTING.md
+SECURITY.md
+LICENSE
+docs/
+
+# Test files (not needed at runtime)
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx

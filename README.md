@@ -4,10 +4,7 @@
 
 [![Bun](https://img.shields.io/badge/runtime-Bun-black?logo=bun)](https://bun.sh)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![CI](https://github.com/KnockoutCity-Pirate-Radio/pirate-radio-server-manager/actions/workflows/ci.yml/badge.svg)](https://github.com/KnockoutCity-Pirate-Radio/pirate-radio-server-manager/actions/workflows/ci.yml)
-
-<!-- Add a screenshot here once you have one: -->
-<!-- ![Dashboard Screenshot](docs/screenshot-dashboard.png) -->
+[![CI](https://github.com/KnockoutCity-Pirate-Radio/PirateRadio-ServerManager/actions/workflows/ci.yml/badge.svg)](https://github.com/KnockoutCity-Pirate-Radio/PirateRadio-ServerManager/actions/workflows/ci.yml)
 
 ## What Is This?
 

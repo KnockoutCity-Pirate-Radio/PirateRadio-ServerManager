@@ -126,6 +126,7 @@ const form = useForm<Values>({ resolver: zodResolver(schema), defaultValues: { n
 
 ```
 src/
+  components/      # Components used for routes
   routes/          # TanStack file-based routes
   ui/              # UI Components
   data/            # Static Data

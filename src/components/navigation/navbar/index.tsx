@@ -1,17 +1,16 @@
-import { Box, Container } from 'styled-system/jsx';
+import { Flex } from 'styled-system/jsx';
+import { Text } from '~/ui';
+import pkg from '../../../../package.json';
 
 export const Navbar = () => {
   return (
-    <Box
-      as="header"
-      bg="gray.surface.bg"
-      position="sticky"
-      top="0"
-      zIndex="sticky"
-    >
-      <Container maxW="unset" p="5">
-        {/* <Text>Pirate Radio: Server Manager</Text> */}
-      </Container>
-    </Box>
+    <Flex px="6" pt="3" justifyContent="flex-end" alignItems="center" gap="3">
+      <Text textStyle="xs" color="fg.subtle">
+        Made by Tandashi
+      </Text>
+      <Text textStyle="xs" color="fg.muted" fontWeight="medium">
+        v{pkg.version}
+      </Text>
+    </Flex>
   );
 };

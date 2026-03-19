@@ -789,11 +789,6 @@ export const fleetProfiles = pgTable('fleet_profiles', {
 // Server / Global Settings
 // ---------------------------------------------------------------------------
 
-export const settingsGlobal = pgTable('settings_global', {
-  key: text('key').notNull().primaryKey(),
-  value: text('value'),
-});
-
 export const statsGlobal = pgTable('stats_global', {
   key: text('key').notNull().primaryKey(),
   value: bigint('value', { mode: 'number' }).notNull(),

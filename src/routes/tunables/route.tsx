@@ -8,7 +8,7 @@ import { PendingChangesBar } from '~/components/tunable/pending-changes-bar';
 import { TagFilter } from '~/components/tunable/tag-filter';
 import { type Tag, Tunable } from '~/components/tunable/tunable';
 import { useDebouncedSearch } from '~/hooks/use-debounced-search';
-import { Alert, Heading, Input, Text, toaster } from '~/ui';
+import { Alert, Checkbox, Heading, Input, Text, toaster } from '~/ui';
 import { TUNABLES } from '../../data/tunables.data';
 
 const fuse = new Fuse(TUNABLES, {
@@ -40,6 +40,7 @@ const putTunables = async (changes: Record<string, number>): Promise<void> => {
 const RouteComponent = () => {
   const { inputValue, onInputChange, search } = useDebouncedSearch(150);
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
+  const [showOnlyModified, setShowOnlyModified] = useState(false);
 
   // Committed values loaded from the DB (id → numeric string)
   const [savedValues, setSavedValues] = useState<Record<string, string>>({});
@@ -84,11 +85,15 @@ const RouteComponent = () => {
 
   const filtered = useMemo(() => {
     const searched = search ? fuse.search(search).map((r) => r.item) : TUNABLES;
-    if (activeTags.size === 0) return searched;
-    return searched.filter((t) =>
+    const tagFiltered = activeTags.size === 0 ? searched : searched.filter((t) =>
       t.tags.some((tag) => activeTags.has(tag.text)),
     );
-  }, [search, activeTags]);
+    if (!showOnlyModified) return tagFiltered;
+    return tagFiltered.filter((t) => {
+      const saved = savedValues[t.id];
+      return saved !== undefined && saved !== String(t.defaultValue ?? '');
+    });
+  }, [search, activeTags, showOnlyModified, savedValues]);
 
   const toggleTag = (text: string) => {
     setActiveTags((prev) => {
@@ -186,6 +191,15 @@ const RouteComponent = () => {
       />
 
       <TagFilter tags={allTags} activeTags={activeTags} onToggle={toggleTag} />
+
+      <Checkbox.Root
+        checked={showOnlyModified}
+        onCheckedChange={(e) => setShowOnlyModified(!!e.checked)}
+      >
+        <Checkbox.HiddenInput />
+        <Checkbox.Control />
+        <Checkbox.Label>Show only modified</Checkbox.Label>
+      </Checkbox.Root>
 
       <Text textStyle="sm" color="fg.muted">
         Showing {filtered.length} / {TUNABLES.length} tunables
